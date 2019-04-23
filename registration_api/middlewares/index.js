@@ -1,0 +1,15 @@
+const item = require("../models/item");
+
+const middlewareObj = {}
+
+middlewareObj.isAdmin = (req,res,next)=>{
+    if(req.body.email === "test@example.com" && req.body.pass === "coolopool"){
+        next();
+    }else{
+        res.redirect("/");
+    }
+
+}
+
+
+module.exports = middlewareObj;

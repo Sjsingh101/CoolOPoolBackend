@@ -1,0 +1,49 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+         <h1 style="text-align: center">Add a new item</h1>
+         <div style="width: 30%; margin: 25px auto;">
+             <form action="/admin/items" method="POST">
+                 <div class="form-group">
+                      <label for="name">Name</label>
+                      <input class="form-control" type="text" name="item[name]" placeholder="">
+                 </div>
+                 
+                 <div class="form-group">
+                        <label for="item_id">Product_ID</label>
+                        <input class="form-control" type="text" name="item[item_id]" placeholder="">
+                   </div>
+
+                 <div class="form-group">
+                      <label for="price">Cost</label>
+                      <input class="form-control" type="number" name="item[price]" placeholder="">
+                 </div>
+
+                 
+                 <div class="form-group">
+                        <label for="discount">Discount</label>
+                        <input class="form-control" type="number" name="item[discount]" placeholder="">
+                   </div>
+                 
+                 <div class="form-group">
+                     <label for="image">Image Url</label>
+                     <input class="form-control" type="text" name="item[image]" placeholder="">
+                 </div>
+                 
+                  <div class="form-group">
+                      <label for="desc">Description</label>
+                      <input class="form-control" type="text" name="item[desc]" placeholder="">
+                 </div>     
+
+                  <div class="form-group">
+                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                 </div>
+             </form>  
+             <a href="/admin/items">Go back</a>
+         </div>    
+         
+   </div>
+</div>
+
+<% include ../partials/footer %>
