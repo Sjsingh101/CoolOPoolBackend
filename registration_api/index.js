@@ -8,7 +8,9 @@ const express               = require('express'),
       User                  = require('./models/user'),
       flash                 = require("connect-flash"),
       Item                  = require("./models/item"),
-      middleware            = require("./middlewares");
+      Bus                   = require("./models/bus"),
+      middleware            = require("./middlewares"),
+      seedDB                = require("./seeds");
 
 mongoose.connect("mongodb://localhost/coolOpool",{useNewUrlParser: true}); 
 
@@ -19,6 +21,7 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine","ejs");
 app.use(flash());
 
+seedDB();
 
 //passport setup
 app.use(require("express-session")({
@@ -146,6 +149,29 @@ app.delete("/admin/items/:id",function(req,res){
         }
     });
 });
+
+
+
+
+////////////////////////////////// BUS INFO ROUTES /////////////////////////////////////
+app.get("/buses", (req,res) => {
+    res.render("buses/index.ejs")
+});
+
+app.post("/buses", (req,res)=> {
+    console.log(req);
+    const b = Bus.find({
+        src: req.body.src,
+        dest: req.body.dest
+    }, (err, docs) => {
+        console.log(docs);
+        res.json(docs);
+    });
+// https://stackoverflow.com/q/44529965
+// <%= docs[0].price %>
+    // console.log(b);
+});
+
 
 const port = process.env.PORT || 3000;
 app.listen(port , () => console.log('App listening on port ' + port));
