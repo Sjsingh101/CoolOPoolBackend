@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const busSchema = new mongoose.Schema({
     src: {
@@ -19,11 +20,9 @@ const busSchema = new mongoose.Schema({
     company: {
         type: String
     },
-
-    // image: {
-    //     type: String
-    // }
-
+    fileID: {
+        type: Schema.Types.ObjectId // There is no need to create references here
+      }
 });
 
 module.exports = mongoose.model("Bus",busSchema);

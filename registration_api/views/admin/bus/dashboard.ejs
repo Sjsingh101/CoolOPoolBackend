@@ -1,0 +1,49 @@
+<%# include ../partials/header %>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CoolOpool</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    </head>
+    <body>
+        
+
+<div class="container">
+    <h1>Admin Bus Info Dashboard</h1>
+    <p>
+      <a class="btn btn-primary btn-lg" href="/admin/bus/new" > Add new bus </a> 
+    </p>
+</div>
+
+<br>
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap; margin-left:85px;"> 
+        <% buses.forEach(function(bus){ %>
+                <div class="col-md-4 col-sm-6">
+                    <div class="thumbnail">
+                       <%# <img id="inimg" src="= bus.image "> %>
+                        <div class="caption">
+                           <strong>SOURCE<h3><%= bus.src %> </h3></strong>
+                           <strong>DESTINATION<h3><%= bus.dest %> </h3></strong>
+                           <strong>COMPANY<h3><%= bus.company %> </h3></strong>
+                           <strong>Travel Cost<h3>₹<%= bus.price %> </h3></strong>
+                        </div>
+
+                
+
+                    <form id="delete-form" action="/admin/bus/<%= bus._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-xs btn-danger">Delete</button>
+                    </form>
+                    </div>    
+                </div>
+        <% }); %>
+    </div>
+
+<%# include .../partials/footer %>
+
+
+</body>
+</html>

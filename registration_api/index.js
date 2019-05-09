@@ -159,18 +159,99 @@ app.get("/buses", (req,res) => {
 });
 
 app.post("/buses", (req,res)=> {
-    console.log(req);
+    //console.log(req);
     const b = Bus.find({
         src: req.body.src,
         dest: req.body.dest
     }, (err, docs) => {
-        console.log(docs);
+        //console.log(docs);
         res.json(docs);
     });
 // https://stackoverflow.com/q/44529965
 // <%= docs[0].price %>
     // console.log(b);
 });
+
+
+
+///////////////////////////// ADMIN BUS ROUTES ///////////////////////////////////
+
+
+
+app.get("/admin/bus",(req,res) => {
+    Bus.find({},function(err,allbus){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("admin/bus/dashboard",{buses: allbus});
+        }
+    });
+});
+
+app.get("/admin/bus/new", (req,res) => {
+    res.render("admin/bus/newBus"); 
+ }); 
+
+app.post("/admin/bus", (req,res) => {
+    
+    Bus.create(req.body.bus, (err,newbus)=> {
+        if(err){
+            console.log(`error from new bus adding: ${err}`);
+        }else{
+           // console.log(newbus);
+            res.redirect("/admin/bus");
+        }   
+    });   
+});
+
+// //show more
+// app.get("/admin/bus/:id", (req,res) => {
+//     Bus.findById(req.params.id, (err,foundbus)=> {
+//         if(err){
+//             console.log(err);
+//         }else{
+//             console.log(foundbus)
+//             res.render("admin/bus/show",{bus: foundbus});
+//         }
+//     });
+// });
+
+// //edit bus route
+// app.get("/admin/bus/:id/edit", (req,res)=> {
+//     Bus.findById(req.params.id, (err,foundbus)=>{      //here is error cannot read property of null 
+//        if(err){
+//            res.redirect("/admin/bus/" + req.params.id);
+//            console.log(err);
+//        }else{
+//            console.log(foundbus);
+//            res.render("admin/bus/edit", {bus: foundbus});
+//        }
+//     });
+// });
+
+app.put("/admin/bus/:id", (req,res)=> {
+    Bus.findByIdAndUpdate(req.params.id,req.body.bus, (err,foundbus)=>{
+        if(err){
+            res.redirect("/admin/bus/" + req.params.id);
+            console.log(err);
+        }else{
+            res.redirect("/admin/bus/" + req.params.id);
+        }
+    });
+});
+
+// DELETE bus ROUTE
+app.delete("/admin/bus/:id",function(req,res){
+    Bus.findByIdAndDelete(req.params.id, function(err){
+        if(err){
+            console.log(`deleting error : ${err}`)
+            res.redirect("/admin/bus");
+        }else{
+            res.redirect("/admin/bus");
+        }
+    });
+});
+
 
 
 const port = process.env.PORT || 3000;
