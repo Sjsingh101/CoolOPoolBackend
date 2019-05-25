@@ -1,7 +1,7 @@
 const express               = require('express'),
       mongoose              = require('mongoose'),
       bodyParser            = require('body-parser'),
-      methodOverride = require("method-override"),
+      methodOverride        = require("method-override"),
       passport              = require('passport'),
       passportLocalMongoose = require('passport-local-mongoose'),
       LocalStrategy         = require('passport-local'),
@@ -10,9 +10,33 @@ const express               = require('express'),
       Item                  = require("./models/item"),
       Bus                   = require("./models/bus"),
       middleware            = require("./middlewares"),
-      seedDB                = require("./seeds");
+      seedDB                = require("./seeds"),
+      multer                = require('multer');
 
 mongoose.connect("mongodb://localhost/coolOpool",{useNewUrlParser: true}); 
+
+
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.filename + '-' + file.originalname);
+      //cb(null, new Date().toISOString() + '-' + file.originalname); why this gives error :/
+    }
+  });
+  
+  const fileFilter = (req, file, cb) => {
+    if (
+      file.mimetype === 'image/png' ||
+      file.mimetype === 'image/jpg' ||
+      file.mimetype === 'image/jpeg'
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
 
 const app = express();
 app.use(methodOverride("_method"))
@@ -21,7 +45,11 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine","ejs");
 app.use(flash());
 
-seedDB();
+app.use(
+    multer({storage: fileStorage, fileFilter: fileFilter}).single('bus[image]')
+  );
+
+//seedDB();
 
 //passport setup
 app.use(require("express-session")({
@@ -159,7 +187,6 @@ app.get("/buses", (req,res) => {
 });
 
 app.post("/buses", (req,res)=> {
-    //console.log(req);
     const b = Bus.find({
         src: req.body.src,
         dest: req.body.dest
@@ -193,8 +220,18 @@ app.get("/admin/bus/new", (req,res) => {
  }); 
 
 app.post("/admin/bus", (req,res) => {
-    
-    Bus.create(req.body.bus, (err,newbus)=> {
+    const src = req.body.bus.src;
+    const dest = req.body.bus.dest;
+    const price = req.body.bus.price;
+    const company = req.body.bus.Company;
+
+    const image = req.file;
+    const imageUrl = image.path;
+    const bus = {src: src, dest: dest, price: price, company: company, imageUrl: imageUrl}
+    if(!image){
+        return res.json({"err": "not an image"});
+    }
+    Bus.create(bus, (err,newbus)=> {
         if(err){
             console.log(`error from new bus adding: ${err}`);
         }else{

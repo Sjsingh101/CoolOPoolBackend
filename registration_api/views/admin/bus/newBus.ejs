@@ -3,7 +3,7 @@
     <div class="row">
          <h1 style="text-align: center">Add a new bus</h1>
          <div style="width: 30%; margin: 25px auto;">
-             <form action="/admin/bus" method="POST">
+             <form action="/admin/bus" method="POST" enctype="multipart/form-data">
                  <div class="form-group">
                       <label for="name">Source</label>
                       <input class="form-control" type="text" name="bus[src]" placeholder="">
@@ -13,10 +13,18 @@
                     <label for="name">Destination</label>
                     <input class="form-control" type="text" name="bus[dest]" placeholder="">
                </div>
+
+               <div class="form-group">
+                <label for="image">Image</label>
+                <input 
+                    type="file" 
+                    name="bus[image]" 
+                    id="image" >
+               </div>
                  
                  <div class="form-group">
                       <label for="price">Ticket Price </label>
-                      <input class="form-control" type="number" name="bus[price]"    placeholder="">
+                      <input class="form-control" type="number" name="bus[price]" placeholder="">
                  </div>
 
                  
@@ -24,6 +32,7 @@
                      <label for="image">Image Url</label>
                      <input class="form-control" type="text" name="bus[image]" placeholder="">
                  </div> -->
+
                  
                   <div class="form-group">
                       <label for="desc">Company</label>

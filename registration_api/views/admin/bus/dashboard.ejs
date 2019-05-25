@@ -17,22 +17,23 @@
       <a class="btn btn-primary btn-lg" href="/admin/bus/new" > Add new bus </a> 
     </p>
 </div>
-
 <br>
 
 <div class="row text-center" style="display:flex; flex-wrap: wrap; margin-left:85px;"> 
         <% buses.forEach(function(bus){ %>
                 <div class="col-md-4 col-sm-6">
                     <div class="thumbnail">
-                       <%# <img id="inimg" src="= bus.image "> %>
+                     <img id="inimg" src="../../../<%= bus.imageUrl %>">
+                     <img id="inimg" src=".../<%= bus.imageUrl %>">
+                     <img id="inimg" src="CoolOPoolBackend\registration_api\<%= bus.imageUrl %>">
+                     <img id="inimg" src="D:\Manvi\CooloPool Web Home\CoolOPoolBackend\registration_api\<%= bus.imageUrl %>">                     
+                     <%= bus.imageUrl %>
                         <div class="caption">
                            <strong>SOURCE<h3><%= bus.src %> </h3></strong>
                            <strong>DESTINATION<h3><%= bus.dest %> </h3></strong>
                            <strong>COMPANY<h3><%= bus.company %> </h3></strong>
                            <strong>Travel Cost<h3>₹<%= bus.price %> </h3></strong>
                         </div>
-
-                
 
                     <form id="delete-form" action="/admin/bus/<%= bus._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-xs btn-danger">Delete</button>
