@@ -14,7 +14,7 @@ router.get("/admin/items", (req,res) => {
 
 
 router.get("/admin/items/new", (req,res) => {
-    res.render("admin/newItem"); 
+    res.render("admin/item/new"); 
  }); 
 
 router.post("/admin/items", (req,res) => {
@@ -35,7 +35,7 @@ router.get("/admin/items/:id", (req,res) => {
             console.log(err);
         }else{
             //console.log(foundItem)
-            res.render("admin/show",{item: foundItem});
+            res.render("admin/item/show",{item: foundItem});
         }
     });
 });
@@ -48,7 +48,7 @@ router.get("/admin/item/:id/edit", (req,res)=> {
            console.log(err);
        }else{
            console.log(foundItem);
-           res.render("admin/edit", {item: foundItem});
+           res.render("admin/item/edit", {item: foundItem});
        }
     });
 });
