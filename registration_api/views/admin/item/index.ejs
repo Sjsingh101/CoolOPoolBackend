@@ -1,0 +1,33 @@
+<% include ../../partials/header %>
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>
+      <a class="btn btn-primary btn-lg" href="/admin/items/new" > Add new Item </a> 
+    </p>
+</div>
+
+<br>
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap; margin-left:85px;"> 
+        <% items.forEach(function(item){ %>
+                <div class="col-md-4 col-sm-6">
+                    <div class="thumbnail">
+                        <img id="inimg" src="<%= item.image %>">
+                        <div class="caption">
+                           <strong><h3><%= item.name %> </h3></strong>
+                           <strong><h4>₹<%= item.price %> </h4></strong>
+                        </div>
+                        <p>
+                          <a href="/admin/items/<%= item._id %> " class="btn btn-primary"><strong>More Info</strong></a>
+                       </p>
+                       <form id="delete-form" action="/admin/items/<%= item._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-xs btn-danger">Delete</button>
+                    </form>
+                    </div>    
+                </div>
+        <% }); %>
+    </div>
+
+<% include ../../partials/footer %>
+
+

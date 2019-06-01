@@ -1,20 +1,17 @@
-const express = require('express'),
-      Item    = require('../models/item'),
-      router  = express.Router();
-///////////////////////////////////////////////////////////////////ADMIN ROUTES///////////////////////////////////////////////////////////////////
-
-router.get("/admin", (req,res) => res.render("admin/login"));
+const express = require('express'), 
+      Item =  require('../../models/item'),
+      router = express.Router();
 
 router.get("/admin/items", (req,res) => {
     Item.find({},function(err,allItems){
         if(err){
             console.log(err);
         }else{
-        
-            res.render("admin/dashboard",{items: allItems});
+            res.render("admin/item/index", {items: allItems});
         }
     });
 });
+
 
 router.get("/admin/items/new", (req,res) => {
     res.render("admin/newItem"); 
@@ -78,6 +75,5 @@ router.delete("/admin/items/:id",function(req,res){
         }
     });
 });
-
 
 module.exports = router;
