@@ -4,7 +4,7 @@
     <div class="row">
          <h1 style="text-align: center">Add a new bus</h1>
          <div style="width: 30%; margin: 25px auto;">
-             <form action="/admin/buses" method="POST">
+             <form action="/admin/bus/<%= bus._id %>?_method=PUT" method="POST">
                  <div class="form-group">
                       <label for="name">Source</label>
                       <input class="form-control" type="text" name="bus[src]" placeholder="">

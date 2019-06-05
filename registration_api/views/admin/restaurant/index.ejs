@@ -1,0 +1,32 @@
+<% include ../../partials/header %>
+<div class="container">
+    <h1>Admin Managing Restaurants</h1>
+    <p>
+      <a class="btn btn-primary btn-lg" href="/admin/restaurants/new" > Add new restaurant </a> 
+    </p>
+</div>
+
+<br>
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap; margin-left:85px;"> 
+        <% restaurants.forEach(function(restaurant){ %>
+                <div class="col-md-4 col-sm-6">
+                    <div class="thumbnail">
+                        <img id="inimg" src="<%= restaurant.image %>">
+                        <div class="caption">
+                           <strong><h3><%= restaurant.name %> </h3></strong>
+                        </div>
+                        <p>
+                          <a href="/admin/restaurants/<%= restaurant._id %> " class="btn btn-primary"><strong>Add foods</strong></a>
+                       </p>
+                       <form id="delete-form" action="/admin/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-xs btn-danger">Delete</button>
+                    </form>
+                    </div>    
+                </div>
+        <% }); %>
+    </div>
+
+<% include ../../partials/footer %>
+
+

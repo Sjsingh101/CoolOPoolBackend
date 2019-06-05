@@ -1,0 +1,26 @@
+<% include ../../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img id="inimg" class="img-responsive" src=" <%= restaurant.image %> ">
+                <h3><a><%=restaurant.name %></a></h3>
+                <div>
+                    <div class="caption-full">
+                             
+                        <a style="margin-left:15px;" class="btn btn-xs btn-warning" href="/admin/restaurant/<%= restaurant._id %>/edit">EDIT</a>
+                        
+                        <form id="delete-form" action="/admin/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+                <a style="margin-top:100px;" href="/admin/restaurants"><strong>Go back</strong></a>
+            
+        </div>
+    </div>
+</div>
+
+<% include ../../partials/footer %> 
