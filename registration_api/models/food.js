@@ -9,8 +9,12 @@ const foodSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
-            image: String,
-            discount: Number
+            discount:{
+                type: Number
+            },
+            image: {
+                type:String
+            }
 });
 
-module.exports = mongoose.model("food",foodSchema);
+module.exports = mongoose.model("Food",foodSchema);

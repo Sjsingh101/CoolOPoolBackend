@@ -8,7 +8,7 @@
                 <div>
                     <div class="caption-full">
                              
-                        <a style="margin-left:15px;" class="btn btn-xs btn-warning" href="/admin/restaurant/<%= restaurant._id %>/edit">EDIT</a>
+                        <a style="margin-left:15px;" class="btn btn-xs btn-warning" href="/admin/restaurants/<%= restaurant._id %>/edit">EDIT</a>
                         
                         <form id="delete-form" action="/admin/restaurants/<%= restaurant._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-xs btn-danger">Delete</button>
@@ -21,6 +21,34 @@
             
         </div>
     </div>
+</div>
+
+<div class="well">
+    <div class="text-right">
+        <a class="btn btn-success" href="/admin/restaurants/<%= restaurant._id %>/foods/new">Add New food</a>
+    </div>
+    
+    <hr>
+    
+    <% restaurant.foods.forEach(function(food){ %>
+         <div class="row">
+             <div class="col-md-12">
+                 <strong>Cost ₹<%= food.cost %></strong>
+                 <span class="pull-right">Discount ₹<%= food.discount %></span>
+                  <p>
+                     <%= food.name %>
+                  </p>                
+                      <a class="btn btn-xs btn-warning" 
+                      href="/admin/restaurants/<%= restaurant._id %>/foods/<%= food._id %>/edit">
+                      Edit
+                      </a>
+                      
+                      <form id="delete-form" action="/admin/restaurants/<%= restaurant.id %>/foods/<%= food._id %>?_method=DELETE" method="POST" >
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                      </form>           
+             </div>
+         </div>
+    <% }) %>
 </div>
 
 <% include ../../partials/footer %> 

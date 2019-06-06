@@ -29,7 +29,7 @@ router.post("/admin/restaurants", (req,res) => {
 });
 
 router.get("/admin/restaurants/:id", (req,res) => {
-    Restaurant.findById(req.params.id, (err,foundrestaurant)=> {
+    Restaurant.findById(req.params.id).populate("foods").exec(function(err,foundrestaurant){
         if(err){
             console.log(err);
         }else{

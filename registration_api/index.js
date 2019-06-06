@@ -15,7 +15,8 @@ const indexroutes = require('./routes/index'),
       adminIndexRoutes = require('./routes/admin/index'),
       adminItemRoutes = require('./routes/admin/item'),
       adminTravelRoutes = require('./routes/admin/travel'),
-      adminRestRoutes = require('./routes/admin/restaurant');
+      adminRestRoutes = require('./routes/admin/restaurant'),
+      adminFoodRoutes = require('./routes/admin/food');
 
 mongoose.connect("mongodb://localhost/coolOpool",{useNewUrlParser: true}); 
 
@@ -48,6 +49,7 @@ app.use(adminIndexRoutes);
 app.use(adminItemRoutes);
 app.use(adminTravelRoutes);
 app.use(adminRestRoutes);
+app.use(adminFoodRoutes);
 
 
 
