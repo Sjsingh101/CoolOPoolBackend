@@ -1,0 +1,28 @@
+<% include ../../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img id="inimg" class="img-responsive" src=" <%= bus.imageUrl %> ">
+                <div>
+                    <div class="caption-full">
+                        <h4 class="pull-right">₹<%= bus.price %></h4>
+                        <h4><a><%=bus.name %></a></h4>
+                        <p> From: <%=bus.src%></p> <br>
+                        <p>To:  <%=bus.src%></p>
+                        <a style="margin-left:15px;" class="btn btn-xs btn-warning" href="/admin/bus/<%= bus._id %>/edit">EDIT</a>
+                        
+                        <form id="delete-form" action="/admin/buses/<%= bus._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+                <a style="margin-top:100px;" href="/admin/buses"><strong>Go back</strong></a>
+            
+        </div>
+    </div>
+</div>
+
+<% include ../../partials/footer %> 

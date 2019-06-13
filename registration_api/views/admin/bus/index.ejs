@@ -1,0 +1,34 @@
+<% include ../../partials/header %>
+<div class="container">
+    <h1>Admin Managing buses</h1>
+    <p>
+      <a class="btn btn-primary btn-lg" href="/admin/buses/new" > Add new bus </a> 
+    </p>
+</div>
+
+<br>
+
+<div class="row text-center" style="display:flex; flex-wrap: wrap; margin-left:85px;"> 
+        <% buses.forEach(function(bus){ %>
+                <div class="col-md-4 col-sm-6">
+                    <div class="thumbnail">
+                        <img id="inimg" src="<%= bus.imageUrl %>">
+                        <div class="caption">
+                           <strong><h3>Source:<%= bus.src %> </h3></strong>
+                           <strong><h3>Destination:<%= bus.dest %> </h3></strong>
+                           <strong><h4>₹<%= bus.price %> </h4></strong>
+                        </div>
+                        <p>
+                          <a href="/admin/buses/<%= bus._id %> " class="btn btn-primary"><strong>More Info</strong></a>
+                       </p>
+                       <form id="delete-form" action="/admin/buses/<%= bus._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-xs btn-danger">Delete</button>
+                    </form>
+                    </div>    
+                </div>
+        <% }); %>
+    </div>
+
+<% include ../../partials/footer %>
+
+
