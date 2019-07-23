@@ -16,13 +16,15 @@ const indexroutes = require('./routes/index'),
       adminItemRoutes = require('./routes/admin/item'),
       adminTravelRoutes = require('./routes/admin/travel'),
       adminRestRoutes = require('./routes/admin/restaurant'),
-      adminFoodRoutes = require('./routes/admin/food');
+      adminFoodRoutes = require('./routes/admin/food'),
+      postRoutes = require('./routes/post/upload');
 
 mongoose.connect("mongodb://localhost/coolOpool",{useNewUrlParser: true}); 
 
 const app = express();
 app.use(methodOverride("_method"))
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 app.set("view engine","ejs");
 app.use(flash());
@@ -50,8 +52,7 @@ app.use(adminItemRoutes);
 app.use(adminTravelRoutes);
 app.use(adminRestRoutes);
 app.use(adminFoodRoutes);
-
-
+app.use(postRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port , () => console.log('App listening on port ' + port));
