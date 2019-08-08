@@ -7,15 +7,11 @@ router.get("/admin/items", (req,res) => {
         if(err){
             console.log(err);
         }else{
-            res.render("admin/item/index", {items: allItems});
+            res.json(allItems);
         }
     });
 });
 
-
-router.get("/admin/items/new", (req,res) => {
-    res.render("admin/item/new"); 
- }); 
 
 router.post("/admin/items", (req,res) => {
     
@@ -23,43 +19,29 @@ router.post("/admin/items", (req,res) => {
         if(err){
             console.log(`error from new item adding: ${err}`);
         }else{
-           // console.log(newItem);
-            res.redirect("/admin/items");
+           res.json(newItem);
         }   
     });   
 });
+
 
 router.get("/admin/items/:id", (req,res) => {
     Item.findById(req.params.id, (err,foundItem)=> {
         if(err){
             console.log(err);
         }else{
-            //console.log(foundItem)
-            res.render("admin/item/show",{item: foundItem});
+            res.json(foundItem);
         }
     });
 });
 
-//edit item route
-router.get("/admin/item/:id/edit", (req,res)=> {
-    Item.findById(req.params.id, (err,foundItem)=>{
-       if(err){
-           res.redirect("/admin/items/" + req.params.id);
-           console.log(err);
-       }else{
-           console.log(foundItem);
-           res.render("admin/item/edit", {item: foundItem});
-       }
-    });
-});
 
-router.put("/admin/item/:id", (req,res)=> {
+router.put("/admin/items/:id", (req,res)=> {
     Item.findByIdAndUpdate(req.params.id,req.body.item, (err,foundItem)=>{
         if(err){
-            res.redirect("/admin/items/" + req.params.id);
-            console.log(err);
+           res.json(err)
         }else{
-            res.redirect("/admin/items/" + req.params.id);
+          res.json("item updated")
         }
     });
 });
@@ -68,10 +50,9 @@ router.put("/admin/item/:id", (req,res)=> {
 router.delete("/admin/items/:id",function(req,res){
     Item.findByIdAndDelete(req.params.id, function(err){
         if(err){
-            console.log(`deleting error : ${err}`)
-            res.redirect("/admin/items");
+            res.json(err)
         }else{
-            res.redirect("/admin/items");
+            res.json("deleted");
         }
     });
 });

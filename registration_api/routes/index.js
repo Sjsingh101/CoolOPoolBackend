@@ -6,7 +6,7 @@ const express  = require('express'),
 //routes
 
 //show form
-router.get('/', (req,res) => res.render("form"));
+router.get('/', (req,res) => res.send("COOLOPOOL ROCKS"));
 
 //handling user sign up
 router.post("/register", function(req,res){
@@ -29,6 +29,13 @@ router.post("/login",passport.authenticate("local",{
 }) ,function(req,res){
     res.status(200).json({message : "success" })
 });
+
+//logout route
+router.get("/logout",function(req, res){
+    req.logout();
+    res.json("logged out");
+});
+
 
 
 module.exports = router;
